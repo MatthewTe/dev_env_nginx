@@ -1,0 +1,31 @@
+version: '3.9'
+services: 
+
+  nginx:
+    image: matthewtee/dev_env_nginx:latest
+    networks:
+      - dev-environment-network
+    ports:
+      - "80:80"
+    container_name: nginx-server
+    restart: always
+  
+  dash_developer_app:
+    image: matthewtee/dash_developer_portfolio:latest
+    networks:
+      - dev-environment-network
+    environment:
+      - PORT=8050
+    container_name: dash_portfolio_site 
+  
+  zotero_dashboard:
+    image: matthewtee/zotero-plotly-dashboard:latest
+    networks: 
+      - dev-environment-network
+    environment:
+      - PORT=8051
+    container_name: zotero_dashboard
+  
+networks: 
+  dev-environment-network:
+
