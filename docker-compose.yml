@@ -2,7 +2,8 @@ version: '3.9'
 services: 
 
   nginx:
-    image: matthewtee/dev_env_nginx:latest
+    build: ./nginx
+    #image: matthewtee/dev_env_nginx:latest
     networks:
       - dev-environment-network
     ports:
@@ -26,6 +27,21 @@ services:
       - PORT=8051
     container_name: zotero_dashboard
   
+  rest_api:
+    image: matthewtee/django_rest_api:latest
+    networks: 
+      - dev-environment-network
+    env_file:
+      - .env
+    container_name: rest-api
+    ports:
+      - "8052:8052"
+    volumes: 
+      - rest-api-db:/db.sqlite3
+
+volumes:
+  rest-api-db:
+
 networks: 
   dev-environment-network:
 
