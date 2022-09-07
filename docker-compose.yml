@@ -3,10 +3,13 @@ services:
 
   nginx:
     image: matthewtee/dev_env_nginx:latest
+    #build: ./nginx
     networks:
       - dev-environment-network
     ports:
       - "80:80"
+      - "81:81"
+
     container_name: nginx-server
     restart: always
   
@@ -25,7 +28,16 @@ services:
     environment:
       - PORT=8051
     container_name: zotero_dashboard
-  
+
+  flask-blog:
+    image: matthewtee/flask_blog_frotend:latest
+    networks: 
+      - dev-environment-network
+    environment:
+      - PRODUCTION=True
+      - PORT=8052
+    container_name: flask-blog
+
   rest_api:
     image: matthewtee/django_rest_api:latest
     networks: 
@@ -35,6 +47,7 @@ services:
     container_name: rest-api
     volumes: 
       - rest-api-db:/db.sqlite3
+
 
 volumes:
   rest-api-db:
