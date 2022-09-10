@@ -48,6 +48,17 @@ services:
     volumes: 
       - rest-api-db:/db.sqlite3
 
+  rest-api-db:
+    image: postgres:latest
+    container_name: rest-api-db
+    volumes: 
+      - rest-api-db:/var/lib/postgresql/data
+    env_file: 
+      .env
+    restart: always
+    networks:
+      - dev-environment-network
+
 
 volumes:
   rest-api-db:
