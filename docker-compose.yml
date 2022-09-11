@@ -45,8 +45,6 @@ services:
     env_file:
       - .env
     container_name: rest-api
-    volumes: 
-      - rest-api-db:/db.sqlite3
 
   rest-api-db:
     image: postgres:latest
