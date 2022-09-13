@@ -4,6 +4,11 @@ services:
   nginx:
     image: matthewtee/dev_env_nginx:latest
     #build: ./nginx
+    depends_on:
+      - 'dash_developer_app'
+      - 'zotero_dashboard'
+      - 'flask-blog'
+      - 'rest_api'
     networks:
       - dev-environment-network
     ports:
