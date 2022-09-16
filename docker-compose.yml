@@ -38,9 +38,8 @@ services:
     image: matthewtee/flask_blog_frotend:latest
     networks: 
       - dev-environment-network
-    environment:
-      - PRODUCTION=True
-      - PORT=8052
+    env_file:
+      - flask.env
     container_name: flask-blog
 
   rest_api:
